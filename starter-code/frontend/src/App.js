@@ -1,14 +1,23 @@
 import React from 'react';
-import App1 from './App1';
+
 import './App.css';
+import Login from './login';
+import Admin from './components/Admin'
+import {Routes, Route} from 'react-router-dom'
+import Boss from './components/Boss';
+import Employ from './components/Employ';
 
 function app() {
 	return(
-		<div className="app">
-			asssdfd
-			<App1/>
+		<div>
+			<Routes>
+			<Route path='/' element={<Login/>}/>
+			<Route path='/admin' element={<Admin/>}/>
+			<Route path='/employ' element={<Employ/>}/>
+			<Route path='/boss' element={<Boss/>}/>
 
-			
+			</Routes>
+
 		</div>
 	)
 }	
