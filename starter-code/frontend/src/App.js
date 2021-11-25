@@ -6,7 +6,7 @@ import Admin from './components/Admin'
 import {Routes, Route} from 'react-router-dom'
 import Boss from './components/Boss';
 import Employ from './components/Employ';
-
+//import Header from './components/header/index';
 function app() {
 	return(
 		<div>
@@ -15,7 +15,6 @@ function app() {
 			<Route path='/admin' element={<Admin/>}/>
 			<Route path='/employ' element={<Employ/>}/>
 			<Route path='/boss' element={<Boss/>}/>
-
 			</Routes>
 
 		</div>
