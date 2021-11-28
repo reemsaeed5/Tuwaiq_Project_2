@@ -4,7 +4,7 @@ import { Container, Table, Form, Button } from "react-bootstrap";
 // import Calendar from "react-select-date";
 import axios from "axios";
 
-export default function Employ() {
+export default function Employ({setVacationRequests, vacationRequests}) {
   const params = useParams();
   const name = params.name;
 
@@ -30,7 +30,7 @@ export default function Employ() {
 const sendVacation = ()=>{
   axios({
     method: 'post',
-    url: 'https://reqres.in/api/user/3',
+    url: 'http://localhost:5000/employ/employ/2',
     data: {
       id:data.id,
       Name: data.Name,
@@ -44,6 +44,8 @@ const sendVacation = ()=>{
   }).then((response) => {
       console.log(response)
       setVacInfo(response.data)
+      setVacationRequests(vacationRequests.concat(response.data))
+      console.log(vacationRequests)
   }) 
   .catch((error)=>{
       console.log(error)

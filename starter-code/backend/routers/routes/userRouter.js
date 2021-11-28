@@ -16,9 +16,8 @@ userRouter.get("/", getAllUser);
 userRouter.post("/", getUser);
 userRouter.post("/user", addNewUser);
 userRouter.put("/user", updateUser);
-
-userRouter.post('/user/:id', addNewVacation);
-
+userRouter.post('/employ/:id', addNewVacation);
+//userRouter.delete('/Admin' , deleteUser);
 // userRouter.get("/", getAllUser);
 //userRouter.post("/employ", addNewUser);
 module.exports = { userRouter };

@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from "react";
+//import data from "./data";
 import { useParams } from "react-router-dom";
+// import InputTodo from './InputTodo';
+//import ReactDeleteRow from 'react-delete-row';
+//import {nanoid} from 'nanoid;'
 import {
   Container,
   Table,
@@ -16,6 +20,7 @@ export default function Employ() {
 
   const [data, setData] = useState(null);
   const [allData, setallData] = useState(null);
+  const [count, setCount] = useState(0);
 
   useEffect(async () => {
     const response = await fetch("http://localhost:5000/user");
@@ -31,7 +36,43 @@ export default function Employ() {
     setallData(data);
   }, []);
 
-  return (
+  const [contacts, setContacts]= useState(data);
+  const [addFormData, setAddFormData] = useState({
+    
+    name:'',
+    Jobtitle:'',
+    email:'',
+    Salary:''
+  })
+  
+   function handleAddFormChange (event){
+     event.preventDefault();
+
+     const fieldName = event.target.getAttribute('name');
+     const fieldValue = event.target.value;
+
+     const newFormData ={...addFormData};
+     newFormData[fieldName]= fieldValue;
+
+     setAddFormData(newFormData);
+
+     function handleAdd(event){
+      event.preventDefault();
+      const newContact = {
+        id : addFormData.Id,
+        name : addFormData.name, 
+        Jobtitle :addFormData.Jobtitle,
+        email: addFormData.email,
+        salary: addFormData.Salary,
+     
+     };  
+     
+
+    const newContacts=[...contacts, newContact];
+     setContacts(newContacts);
+     } ;
+   };
+   return (
     <Container className="myContainer">
       <h4> Your Data:</h4>
       {data && (
@@ -61,14 +102,14 @@ export default function Employ() {
         </Table>
       )}
       <h4> Employees Data:</h4>
-      <InputGroup className="mb-3">
+      {/* <InputGroup className="mb-3">
         <InputGroup.Text id="basic-addon1">@</InputGroup.Text>
         <FormControl
           placeholder="Username"
           aria-label="Username"
           aria-describedby="basic-addon1"
-        />
-      </InputGroup>
+        /> */}
+      {/* </InputGroup> */}
       {data && (
         <Table striped bordered hover size="sm">
           <thead>
@@ -105,12 +146,93 @@ export default function Employ() {
                   </tr>
                 );
               })}
+   
+            {/* { allData.map((id, i) => { return (
+            <ReactDeleteRow key={i} data={id} onDelete={ id => { return window.confirm(`Are you sure?`) }}>
+                <td>{id.title}</td>
+                <td>{id.body}</td>
+            </ReactDeleteRow>
+            )}) } */}
+        
           </tbody>
         </Table>
       )}
       <br />
-      <Button variant="outline-primary">Add Employe</Button> {" "}<br />
-      <Button variant="outline-primary">save</Button>{" "}
+      {/* <Button variant="outline-primary">Add Employe</Button> {" "}<br /> */}
+      <button type="submit" className="form" onSubmit={handleSubmit}>add Employees</button>
+           <form  >  
+      <input 
+      type="text" 
+      name="id" 
+      required= "required"
+      placeholder= " Enter a id..."
+/>
+<input 
+      type="text" 
+      name="Name" 
+      required= "required"
+      placeholder= " Enter a name..."
+      onChange={handleAddFormChange}
+/>
+<input 
+      type="text" 
+      name="email" 
+      required= "required"
+      placeholder= " Enter a email..."
+      onChange={handleAddFormChange}
+/>
+<input 
+      type="text" 
+      name="JobTitle" 
+      required= "required"
+      placeholder= " Enter a job title..."
+      onChange={handleAddFormChange}
+/>
+<input 
+      type="text" 
+      name="Salary" 
+      required= "required"
+      placeholder= " Enter a salary..."
+      onChange={handleAddFormChange}
+/>
+
+</form>
+
+      {data && (
+        <Table striped bordered hover size="sm">
+          <thead>
+            <tr>
+              <th># id</th>
+                <th>Name</th>
+                <th>JobTitle</th>
+                <th>vanction</th>
+                <th>from Date</th>
+                <th>To Date</th>
+                <th>state.</th>
+            </tr>
+          </thead>
+          <tbody>
+            {allData &&
+              allData.map((elem) => {
+                return (
+                  <tr>
+                     <td>{elem.id}</td>
+                    <td>{elem.Name}</td>
+                    <td>{elem.JobTitle}</td>
+                    <td>{elem.vanction}</td>
+                    <td>{elem.fromDate}</td>
+                    <td>{elem.ToDate}</td>
+                    <td>{elem.state}</td>
+                    
+                  </tr>
+                );
+              })}
+          </tbody>
+        </Table>
+      )}
+      
     </Container>
+      
   );
+  
 }

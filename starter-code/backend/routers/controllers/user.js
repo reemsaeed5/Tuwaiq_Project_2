@@ -36,15 +36,15 @@ const addNewUser = (req, res) => {
 };
 
 const addNewVacation = (req, res) => {
-  const Id = sessionStorage.getItem("Id");
+  // const Id = window.sessionStorage.getItem("Id");
   const addVecation = {
-    id: Id,
-    Name: "Reem Saeed",
-    JobTitle: "Admin",
-    vanction: "",
-    starDate: "",
-    endDate: "",
-    state: "",
+    id: req.body.id,
+    Name: req.body.Name,
+    JobTitle: req.body.JobTitle,
+    vanction: req.body.vanction,
+    startDate: req.body.startDate,
+    endDate: req.body.endDate,
+    state: req.body.state,
   };
 
   Employe.push(addVecation);
@@ -73,4 +73,15 @@ const registrUser = (req, res) => {
     }
   });
 };
-module.exports = { getAllUser, getUser, updateUser, addNewUser, registrUser, addNewVacation };
+// const deleteUser = (req, res) => {
+//   const userId = req.query.id;
+//   user.forEach((elem, i) => {
+//     if (i == userId) {
+//       elem.name = req.body.name;
+//       elem.job = req.body.job;
+//       elem.Tell = req.body.Tell;
+//     }
+    
+//   });
+// };
+module.exports = { getAllUser, getUser, updateUser, addNewUser, registrUser, addNewVacation};
