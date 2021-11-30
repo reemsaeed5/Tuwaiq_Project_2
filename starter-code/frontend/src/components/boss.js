@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { Container, Table,  InputGroup,
-  FormControl, } from "react-bootstrap";
+import { Container, Table, InputGroup, FormControl } from "react-bootstrap";
 
 export default function Employ() {
   const params = useParams();
   const name = params.name;
-  
+  const allRequests = JSON.parse(localStorage.getItem("VacationRequest"));
 
   const [data, setData] = useState(null);
   const [allData, setallData] = useState(null);
@@ -24,6 +23,7 @@ export default function Employ() {
   }, []);
   return (
     <Container className="myContainer">
+      <h4> your Data</h4>
       {data && (
         <Table striped bordered hover size="sm">
           <thead>
@@ -50,9 +50,8 @@ export default function Employ() {
           </tbody>
         </Table>
       )}
-   
-  
-  <h4> Employees Data:</h4>
+
+      <h4> Employees Data:</h4>
       <InputGroup className="mb-3">
         <InputGroup.Text id="basic-addon1">@</InputGroup.Text>
         <FormControl
@@ -75,6 +74,7 @@ export default function Employ() {
             </tr>
           </thead>
           <tbody>
+            
             {allData &&
               allData.map((elem) => {
                 return (
@@ -92,6 +92,52 @@ export default function Employ() {
           </tbody>
         </Table>
       )}
- </Container>
+<h4>Vanction Data:</h4>
+      {data && (
+        <Table
+          striped
+          bordered
+          hover
+          size="sm"
+          style={{ textAlign: "center" }}
+          style={{ textAlign: "center" }}
+        >
+          <thead>
+            <tr>
+              <th># id</th>
+              <th>Name</th>
+              <th>JobTitle</th>
+              <th>vanction</th>
+              <th>StartDate</th>
+              <th>EndDate</th>
+              <th>state.</th>
+              {/* <th>state.</th> */}
+            </tr>
+          </thead>
+          <tbody>
+            {allRequests &&
+              allRequests.map((elem, i) => {
+                return (
+                  <tr>
+                    <td>{elem.id}</td>
+                    <td>{elem.Name}</td>
+                    <td>{elem.JobTitle}</td>
+                    <td>{elem.vanction}</td>
+                    <td>{elem.startDate}</td>
+                    <td>{elem.endDate}</td>
+                    <td>{elem.state}</td>
+                    {/* <td>
+                      {" "}
+                      <button type="delete" id="dell">
+                        delete
+                      </button>
+                    </td> */}
+                  </tr>
+                );
+              })}
+          </tbody>
+        </Table>
+      )}
+    </Container>
   );
-            }
+}

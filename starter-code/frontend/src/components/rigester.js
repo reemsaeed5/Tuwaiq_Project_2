@@ -2,7 +2,7 @@ import React from "react";
 
 // import { Container } from "react-bootstrap";
 
-//import { useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 
 import { useState } from "react";
 
@@ -12,19 +12,22 @@ import axios from "axios";
 
 export default function Register() {
 
-  
+  const nav = useNavigate();
 
   const [name, setName] = useState("");
 
   const [id, setID] = useState("");
 
   const [password, setPassword] = useState("");
-
+  const [Jobtitle, setJobtitle] = useState("");
+  const [Salary, setSalary] = useState("");
+  const [ContractValidity, setContractValidity]=useState("");
+  const [Tell, setTell] = useState("");
 // setPassword(e.target.value)
 
   function form() {
 
-    return name && id && password;
+    return id && name && password && Jobtitle && Salary && ContractValidity && Tell;
 
   }
 
@@ -33,9 +36,6 @@ export default function Register() {
   function handleSubmit(event) {
 
     event.preventDefault();
-
- 
-
     axios
 
       .post("http://localhost:5000/users", {
@@ -45,6 +45,10 @@ export default function Register() {
         id: id,
 
         password: password,
+        Jobtitle: Jobtitle,
+        Salary: Salary,
+        ContractValidity:ContractValidity,
+        Tell:Tell,
 
       })
 
@@ -70,7 +74,7 @@ export default function Register() {
 
       <img
 
-        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9z1qQSwtKWl76KuEIBhaLIu5q95TZRiRq7w&usqp=CAU"
+        src=""
 
         height="100px"
 
@@ -127,6 +131,7 @@ export default function Register() {
           placeholder="Enter password" value={password} onChange={(e) => setPassword(e.target.value)}
 
  
+          
 
         />
 

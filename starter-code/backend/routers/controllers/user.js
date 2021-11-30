@@ -1,12 +1,13 @@
 const e = require("express");
 const { user } = require("../Data");
-const { Employe } = require("../DataEmp");
+
 // _________________________________________________________________________
 //  getUser
 // _________________________________________________________________________
 const getAllUser = (req, res) => {
   res.send(user);
 };
+
 const getUser = (req, res) => {
   console.log(req.body);
   console.log(user);
@@ -36,6 +37,7 @@ const addNewUser = (req, res) => {
 };
 
 const addNewVacation = (req, res) => {
+  console.log("Employee request to add vacation");
   // const Id = window.sessionStorage.getItem("Id");
   const addVecation = {
     id: req.body.id,
@@ -51,6 +53,19 @@ const addNewVacation = (req, res) => {
   res.status(201).send(addVecation);
 };
 
+const addUser = (req, res) => {
+  const addUser = {
+    id: req.body.id,
+    Name: req.body.name,
+    JobTitle: req.body.JobTitle,
+    Salary: req.body.Salary,
+    email: req.body.email,
+  };
+
+  user.push(addUser);
+  res.status(201).send(addUser);
+};
+
 const updateUser = (req, res) => {
   const userId = req.query.id;
   user.forEach((elem, i) => {
@@ -61,6 +76,7 @@ const updateUser = (req, res) => {
     }
   });
 };
+
 const registrUser = (req, res) => {
   const userId = req.query.id;
   user.forEach((elem, i) => {
@@ -73,15 +89,31 @@ const registrUser = (req, res) => {
     }
   });
 };
+
 // const deleteUser = (req, res) => {
 //   const userId = req.query.id;
 //   user.forEach((elem, i) => {
 //     if (i == userId) {
 //       elem.name = req.body.name;
-//       elem.job = req.body.job;
+//       elem.JobTitle = req.body.JobTitle;
 //       elem.Tell = req.body.Tell;
 //     }
-    
-//   });
+//    });
 // };
-module.exports = { getAllUser, getUser, updateUser, addNewUser, registrUser, addNewVacation};
+
+// const deleteUser = (req, res) => {
+//   const foundUser = user.find((elem) => elem.id === req.body.id);
+//   if (!foundUser) return res.send("This user not found !");
+//   user.splice(req.params.id, 1);
+//   res.send(user);
+// };
+
+module.exports = {
+  getAllUser,
+  getUser,
+  updateUser,
+  addNewUser,
+  registrUser,
+  addNewVacation,
+  addUser,
+};

@@ -4,7 +4,7 @@ import { Container, Table, Form, Button } from "react-bootstrap";
 // import Calendar from "react-select-date";
 import axios from "axios";
 
-export default function Employ({setVacationRequests, vacationRequests}) {
+export default function Employ() {
   const params = useParams();
   const name = params.name;
 
@@ -12,8 +12,10 @@ export default function Employ({setVacationRequests, vacationRequests}) {
   const [display, setDisplay] = useState("none");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
-  const [vacInfo, setVacInfo] = useState({})
+  const [vacInfo, setVacInfo] = useState([]);
   const [vacReason, setVacReason] = useState("");
+  const [allData, setallData] = useState(null);
+  // console.log(startDate);
 
   useEffect(async () => {
     const response = await fetch("/user");
@@ -21,40 +23,70 @@ export default function Employ({setVacationRequests, vacationRequests}) {
     const userId = sessionStorage.getItem("Id");
     const info = data.find((user) => user.userId === userId);
     setData(info);
+    const final = JSON.parse(localStorage.getItem("VacationRequest"));
+    setVacInfo(final);
   }, []);
-  
-  useEffect(() => {
-    setVacInfo({Name: data.Name, JobTitle: data.JobTitle})
-  }, [data])
 
-const sendVacation = ()=>{
-  axios({
-    method: 'post',
-    url: 'http://localhost:5000/employ/employ/2',
-    data: {
-      id:data.id,
-      Name: data.Name,
-      JobTitle: data.JobTitle,
-      Tell:data.Tell,
-      vanction: vacReason,
-      startDate:startDate,
-      endDate: endDate,
-      state:'send',
+  // useEffect(() => {
+  //   setVacInfo({
+  //     Name: data.Name,
+  //     JobTitle: data.JobTitle,
+  //     Id: data.Id,
+  //     EndDate: data.endDate,
+  //     StartDate: data.StartDate,
+  //     Vanction: data.Vanction,
+  //   });
+  // }, []);
+
+  // useEffect(async () => {
+  //   const response = await fetch("http://localhost:5000/user");
+  //   const data = await response.json();
+  //   setallData(data);
+  // }, []);
+
+  const sendVacation = () => {
+    const vacationList = JSON.parse(localStorage.getItem("VacationRequest"));
+
+    if (vacationList !== null) {
+      const userVacation = vacationList.filter((elem) => elem.id === data.id);
+      const lastelement = userVacation[userVacation.length - 1];
+
+      const newVacation = {
+        id: data.id,
+        Name: data.Name,
+        JobTitle: data.JobTitle,
+        Tell: data.Tell,
+        vanction: vacReason,
+        vanctionid: parseInt(lastelement.vanctionid) + 1,
+        startDate: startDate,
+        endDate: endDate,
+        state: "Wating ...",
+      };
+      vacationList.push(newVacation);
+      localStorage.setItem("VacationRequest", JSON.stringify(vacationList));
+    } else {
+      let newVacations = [];
+      const newVacation = {
+        id: data.id,
+        Name: data.Name,
+        JobTitle: data.JobTitle,
+        Tell: data.Tell,
+        vanction: vacReason,
+        vanctionid: 1,
+        startDate: startDate,
+        endDate: endDate,
+        state: "Wating ...",
+      };
+      newVacations.push(newVacation);
+      localStorage.setItem("VacationRequest", JSON.stringify(newVacations));
     }
-  }).then((response) => {
-      console.log(response)
-      setVacInfo(response.data)
-      setVacationRequests(vacationRequests.concat(response.data))
-      console.log(vacationRequests)
-  }) 
-  .catch((error)=>{
-      console.log(error)
-  })
-}
-  
+    window.location.href = "/employ";
+  };
+
   return (
     <div>
       <Container className="myContainer">
+        <h3>your Data:</h3>
         {data && (
           <Table striped bordered hover size="sm">
             <thead>
@@ -90,9 +122,7 @@ const sendVacation = ()=>{
             name="status"
             id={`default-radio`}
             label={`S/sick`}
-            onChange={()=>[
-            setVacReason("S/sick")
-            ]}
+            onChange={() => [setVacReason("S/sick")]}
           />
           <Form.Check
             type="radio"
@@ -100,9 +130,7 @@ const sendVacation = ()=>{
             name="status"
             id={`default-radio`}
             label={`V/vaction`}
-            onChange={()=>[
-              setVacReason("V/vaction")
-            ]}
+            onChange={() => [setVacReason("V/vaction")]}
           />
           <Form.Check
             type="radio"
@@ -110,9 +138,7 @@ const sendVacation = ()=>{
             name="status"
             id={`default-radio`}
             label={`Bre/breeavement Leave`}
-            onChange={()=>[
-              setVacReason("Bre/breeavement Leave")
-            ]}
+            onChange={() => [setVacReason("Bre/breeavement Leave")]}
           />
           <Form.Check
             type="radio"
@@ -120,9 +146,7 @@ const sendVacation = ()=>{
             name="status"
             id={`default-radio`}
             label={`Flh/floating Holiday`}
-            onChange={()=>[
-              setVacReason("Flh/floating Holiday")
-            ]}
+            onChange={() => [setVacReason("Flh/floating Holiday")]}
           />
           <Form.Check
             type="radio"
@@ -130,9 +154,7 @@ const sendVacation = ()=>{
             name="status"
             id={`default-radio`}
             label={`W/wellness holiday`}
-            onChange={()=>[
-              setVacReason("W/wellness holiday")
-            ]}
+            onChange={() => [setVacReason("W/wellness holiday")]}
           />
           <Form.Check
             type="radio"
@@ -140,9 +162,7 @@ const sendVacation = ()=>{
             name="status"
             id={`default-radio`}
             label={`Fml/fmla`}
-            onChange={()=>[
-              setVacReason("Fml/fmla")
-            ]}
+            onChange={() => [setVacReason("Fml/fmla")]}
           />
         </Form>
         {/* <Form.Select>
@@ -153,7 +173,6 @@ const sendVacation = ()=>{
         <Button variant="primary" size="s" onClick={() => setDisplay("block")}>
           Date
         </Button>{" "}
-        {console.log(display)}
         <div style={{ display: `${display}` }}>
           <label>From: </label>
           <input
@@ -172,38 +191,40 @@ const sendVacation = ()=>{
           active
           onClick={() => {
             setDisplay("none");
-            sendVacation()
+            sendVacation();
           }}
         >
           save & send
         </Button>{" "}
-        );
-
         {/* __________________________ */}
-       
-        {data && (
+        {vacInfo && (
           <Table striped bordered hover size="sm">
             <thead>
               <tr>
                 <th># id</th>
                 <th>Name</th>
-                <th>JobTitle</th>
+                <th>JobTitlee</th>
                 <th>vanction</th>
-                <th>from Date</th>
-                <th>To Date</th>
+                <th>startDate</th>
+                <th>endDate</th>
                 <th>state.</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>{vacInfo.id}</td>
-                <td>{vacInfo.Name}</td>
-                <td>{vacInfo.JobTitle}</td>
-                <td>{vacInfo.vanction}</td>
-                <td>{vacInfo.startDate}</td>
-                <td>{vacInfo.endDate}</td>
-                <td>{vacInfo.state}</td>
-              </tr>
+              {vacInfo.map((elem) => {
+                return (
+                  <tr>
+                    {/* data.endDate, startDate: data.startDate,vacReason:data.vanction */}
+                    <td>{elem.id}</td>
+                    <td>{elem.Name}</td>
+                    <td>{elem.JobTitle}</td>
+                    <td>{elem.vanction}</td>
+                    <td>{elem.startDate}</td>
+                    <td>{elem.endDate}</td>
+                    <td>{elem.state}</td>
+                  </tr>
+                );
+              })}
             </tbody>
           </Table>
         )}

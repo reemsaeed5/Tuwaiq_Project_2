@@ -14,7 +14,7 @@ const user = [
   },
   {
     id: "2",
-    Name: "Mohammed Alsenani",
+    Name: "Mohammed",
     JobTitle: "boss",
     Salary: "15000 SR",
     ContractValidity: "2years",
@@ -54,4 +54,5 @@ const user = [
     isUser: true,
   },
 ];
+
 module.exports = { user };

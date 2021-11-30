@@ -6,6 +6,7 @@ import Admin from "./components/Admin";
 import swal from "sweetalert";
 import "./login.css";
 import axios from "axios";
+
 export default function Login() {
   const nav = useNavigate();
   const [email, setEmail] = useState("");
