@@ -1,0 +1,30 @@
+body{
+    background-image: url("./img/R3.jpg");
+}   
+
+h4 { display: block;
+    font-size: 25px;
+    text-align: center;
+    color: rgba(97, 55, 139, 0.521);
+    font-family: 'Times New Roman', Times, serif;
+
+    }
+    #save{display: block;
+        font-size: 20px;
+        text-align: center;
+        color: rgba(97, 55, 139, 0.521);
+        font-family: 'Times New Roman', Times, serif;
+
+    }
+
+    #b1{display: block;
+        font-size: 20px;
+        text-align: center;
+        color: rgba(97, 55, 139, 0.521);
+        font-family: 'Times New Roman', Times, serif;
+
+    }
+
+   td{
+       font-family: Georgia, 'Times New Roman', Times, serif;
+   }

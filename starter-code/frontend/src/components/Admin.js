@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
-//import data from "./data";
 import { useParams } from "react-router-dom";
 import ReactDeleteRow from "react-delete-row";
-//import swal from "sweetalert";
+import Admin from '../components/Admin.css';
 
-//import {nanoid} from 'nanoid;'
+
 import {
   Container,
   Table,
@@ -42,10 +41,7 @@ export default function Employ({ vacationRequests }) {
   const [data, setData] = useState(null);
   const [allData, setAllData] = useState(null);
   const [count, setCount] = useState(0);
-  // localStorage.getItem('state');
-  // const [accept,sitItem] = useState();
-  // const [riject,sitRij] = useState();
-  // const [elem,sitelem] = useState();
+ 
 
   useEffect(async () => {
     const response = await fetch("http://localhost:5000/user");
@@ -95,50 +91,7 @@ export default function Employ({ vacationRequests }) {
     window.location.href = "/admin";
   };
 
-  // const [contacts, setContacts] = useState(data);
-  // const [addFormData, setAddFormData] = useState({
-  //   name: "",
-  //   Jobtitle: "",
-  //   email: "",
-  //   Salary: "",
-  // });
-
-  // function handleAddFormChange(event) {
-  //    event.preventDefault();
-  //  const fieldName = event.target.getAttribute("name");
-  //  const fieldValue = event.target.value;
-
-  //  const newFormData = { ...addFormData };
-  //  newFormData[fieldName] = fieldValue;
-
-  //    setAddFormData(newFormData);
-  //  }
-
-  //  function handleAdd() {
-  //    const newContact = {
-  //     id: addFormData.id,
-  //     name: addFormData.name,
-  //      Jobtitle: addFormData.Jobtitle,
-  //      email: addFormData.email,
-  //      salary: addFormData.Salary,
-  //   };
-
-  // const newContacts = [...contacts, newContact];
-  // setContacts(newContacts);
-  // }
-
-  // function deleteUser(){
-  //   axios.get('/user/delete')
-  //   .then()
-  // }
-
-  // const deleteEmployee = (id) => {
-  //   const deleteEmp = userId.find((element ,i) =>{
-  //     return element.id == id
-  //   })
-
-  //   setEmplyees(deleteEmp);
-  //  }
+  
 
   return (
     <Container className="myContainer">
@@ -202,9 +155,7 @@ export default function Employ({ vacationRequests }) {
                     <td>{elem.ContractValidity}</td>
                     <td>{elem.Tell}</td>
                     <td>{elem.email}</td>
-                    {/* <td>
-                      <button>Delete</button>
-                    </td> */}
+                    
                   </ReactDeleteRow>
                 );
               })}
@@ -225,28 +176,14 @@ export default function Employ({ vacationRequests }) {
                     <td>{elem.ContractValidity}</td>
                     <td>{elem.Tell}</td>
                     <td>{elem.Email}</td>
-                    {/* <td>
-                      <button>Delete</button>
-                    </td> */}
+                    
                   </ReactDeleteRow>
                 );
               })}
           </tbody>
         </Table>
       )}
-      {/* <InputGroup className="mb-3">
-        <InputGroup.Text id="basic-addon1">@</InputGroup.Text>
-        <FormControl
-          placeholder="Username"
-          aria-label="Username"
-          aria-describedby="basic-addon1"
-        />
-      </InputGroup> */}
-      <br />
-      {/* <Button variant="outline-primary">Add Employe</Button> {" "}<br /> */}
-      {/* <button type="submit" onClick={() => handleAdd()}> */}
-      {/* add Employees
-      </button> */}
+      
       <h4>Add New User: </h4>
       <form>
         <input
@@ -298,7 +235,7 @@ export default function Employ({ vacationRequests }) {
           placeholder=" Enter a ContractValidity..."
           onChange={(e) => setContractValidity(e.target.value)}
         />
-        <button type="save" id="save" onClick={() => saveUser()}>
+        <button type="save"  id="save" onClick={() => saveUser()}>
           Save
         </button>
       </form>
@@ -323,7 +260,7 @@ export default function Employ({ vacationRequests }) {
               <th>state.</th>
               <th>accept.</th>
               <th>riject.</th>
-              {/* <th>state.</th> */}
+              
             </tr>
           </thead>
           <tbody>
@@ -340,7 +277,7 @@ export default function Employ({ vacationRequests }) {
                     <td>{elem.state}</td>
                     <td>
                       {" "}
-                      <button
+                      <button id="b1"
                         onClick={() => {
                           const data = JSON.parse(
                             localStorage.getItem("VacationRequest")
@@ -375,7 +312,7 @@ export default function Employ({ vacationRequests }) {
                       </button>
                     </td>
                     <td>
-                      <button
+                      <button id="b1"
                         onClick={() => {
                           const data = JSON.parse(
                             localStorage.getItem("VacationRequest")
@@ -409,18 +346,16 @@ export default function Employ({ vacationRequests }) {
                         riject
                       </button>
                     </td>
-                    {/* <td>
-                      {" "}
-                      <button type="delete" id="dell">
-                        delete
-                      </button>
-                    </td> */}
+                    
                   </tr>
                 );
               })}
           </tbody>
         </Table>
+
+        //________________________________________________________________//
+        
       )}
-    </Container>
+</Container>
   );
 }

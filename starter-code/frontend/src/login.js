@@ -6,6 +6,7 @@ import Admin from "./components/Admin";
 import swal from "sweetalert";
 import "./login.css";
 import axios from "axios";
+import R from './components/img/R.jpg';
 
 export default function Login() {
   const nav = useNavigate();
@@ -45,6 +46,7 @@ export default function Login() {
   return (
     <div className="Login">
       <Form onSubmit={handleSubmit}>
+      <img src={R}  width="500px" high="600px" alt="Logo" />
         <Form.Group size="lg" controlId="email">
           <Form.Label id="h">Email</Form.Label>
           <Form.Control
@@ -62,7 +64,7 @@ export default function Login() {
             onChange={(e) => setPassword(e.target.value)}
           />
         </Form.Group>
-        <Button block size="lg" type="submit" disabled={!validateForm()}>
+        <Button block size="lg" type="submit" variant="outline-secondary" disabled={!validateForm()}>
           Login
         </Button>
       </Form>

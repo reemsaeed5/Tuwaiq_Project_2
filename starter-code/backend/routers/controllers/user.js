@@ -90,23 +90,6 @@ const registrUser = (req, res) => {
   });
 };
 
-// const deleteUser = (req, res) => {
-//   const userId = req.query.id;
-//   user.forEach((elem, i) => {
-//     if (i == userId) {
-//       elem.name = req.body.name;
-//       elem.JobTitle = req.body.JobTitle;
-//       elem.Tell = req.body.Tell;
-//     }
-//    });
-// };
-
-// const deleteUser = (req, res) => {
-//   const foundUser = user.find((elem) => elem.id === req.body.id);
-//   if (!foundUser) return res.send("This user not found !");
-//   user.splice(req.params.id, 1);
-//   res.send(user);
-// };
 
 module.exports = {
   getAllUser,

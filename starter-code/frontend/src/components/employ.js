@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Container, Table, Form, Button } from "react-bootstrap";
-// import Calendar from "react-select-date";
 import axios from "axios";
 
 export default function Employ() {
@@ -27,22 +26,7 @@ export default function Employ() {
     setVacInfo(final);
   }, []);
 
-  // useEffect(() => {
-  //   setVacInfo({
-  //     Name: data.Name,
-  //     JobTitle: data.JobTitle,
-  //     Id: data.Id,
-  //     EndDate: data.endDate,
-  //     StartDate: data.StartDate,
-  //     Vanction: data.Vanction,
-  //   });
-  // }, []);
-
-  // useEffect(async () => {
-  //   const response = await fetch("http://localhost:5000/user");
-  //   const data = await response.json();
-  //   setallData(data);
-  // }, []);
+ 
 
   const sendVacation = () => {
     const vacationList = JSON.parse(localStorage.getItem("VacationRequest"));
@@ -165,12 +149,14 @@ export default function Employ() {
             onChange={() => [setVacReason("Fml/fmla")]}
           />
         </Form>
-        {/* <Form.Select>
-    <option>Default select</option>
-    <option>Default select</option>
-  </Form.Select> */}
+        
         <br></br>
-        <Button variant="primary" size="s" onClick={() => setDisplay("block")}>
+        <Button font-size= "25px"
+        text-align= "center"
+        color=" rgba(97, 55, 139, 0.521)"
+        font-family= 'Times New Roman'
+        variant="outline-secondary"
+         size="s" onClick={() => setDisplay("block")}>
           Date
         </Button>{" "}
         <div style={{ display: `${display}` }}>
@@ -186,9 +172,12 @@ export default function Employ() {
           ></input>
         </div>
         <Button
-          variant="primary"
+        font-size= "25px"
+        text-align= "center"
+        color=" rgba(97, 55, 139, 0.521)"
+        font-family= 'Times New Roman'
+        variant="outline-secondary"
           size="s"
-          active
           onClick={() => {
             setDisplay("none");
             sendVacation();
@@ -214,7 +203,6 @@ export default function Employ() {
               {vacInfo.map((elem) => {
                 return (
                   <tr>
-                    {/* data.endDate, startDate: data.startDate,vacReason:data.vanction */}
                     <td>{elem.id}</td>
                     <td>{elem.Name}</td>
                     <td>{elem.JobTitle}</td>

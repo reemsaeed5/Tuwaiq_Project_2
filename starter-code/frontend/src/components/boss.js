@@ -52,6 +52,7 @@ export default function Employ() {
       )}
 
       <h4> Employees Data:</h4>
+      
       <InputGroup className="mb-3">
         <InputGroup.Text id="basic-addon1">@</InputGroup.Text>
         <FormControl
@@ -59,6 +60,7 @@ export default function Employ() {
           aria-label="Username"
           aria-describedby="basic-addon1"
         />
+        
       </InputGroup>
       {data && (
         <Table striped bordered hover size="sm">
@@ -126,12 +128,6 @@ export default function Employ() {
                     <td>{elem.startDate}</td>
                     <td>{elem.endDate}</td>
                     <td>{elem.state}</td>
-                    {/* <td>
-                      {" "}
-                      <button type="delete" id="dell">
-                        delete
-                      </button>
-                    </td> */}
                   </tr>
                 );
               })}
