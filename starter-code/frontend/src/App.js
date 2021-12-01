@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{useState, attendance} from 'react';
 
 import './App.css';
 import Login from './login';
@@ -7,7 +7,7 @@ import {Routes, Route} from 'react-router-dom'
 import Boss from './components/Boss';
 import Employ from './components/employ';
 
-//import Header from './components/header/index';
+
 function App() {
 	const [vacationRequests, setVacationRequests] = useState([]);
 	return(

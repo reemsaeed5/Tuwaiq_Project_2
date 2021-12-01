@@ -97,7 +97,7 @@ export default function Employ() {
             </tbody>
           </Table>
         )}
-        <h3>Sick/Vaction REQUEST:</h3>
+        <h3>Sick/Vacation REQUEST:</h3>
         <h4>REQUESTING:</h4>
         <Form>
           <Form.Check

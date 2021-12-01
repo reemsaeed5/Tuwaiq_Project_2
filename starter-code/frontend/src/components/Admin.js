@@ -2,8 +2,6 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import ReactDeleteRow from "react-delete-row";
 import Admin from '../components/Admin.css';
-
-
 import {
   Container,
   Table,
@@ -12,7 +10,8 @@ import {
   Form,
   Button,
 } from "react-bootstrap";
-//import { MDBCol, MDBIcon } from "mdbreact";
+
+
 
 export default function Employ({ vacationRequests }) {
   const params = useParams();
@@ -26,7 +25,6 @@ export default function Employ({ vacationRequests }) {
   const [salary, setSalary] = useState(0);
   const [Tell, setTell] = useState(0);
   const [ContractValidity, setContractValidity] = useState("");
-
   const [display, setDisplay] = useState("");
 
   //Get All vacationRequests from Local Storage
@@ -42,6 +40,8 @@ export default function Employ({ vacationRequests }) {
   const [allData, setAllData] = useState(null);
   const [count, setCount] = useState(0);
  
+  const current = new Date();
+  const date = `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()}`;
 
   useEffect(async () => {
     const response = await fetch("http://localhost:5000/user");
@@ -240,6 +240,8 @@ export default function Employ({ vacationRequests }) {
         </button>
       </form>
 
+
+      <h4>vacation requests:</h4>
       {data && (
         <Table
           striped
@@ -355,6 +357,28 @@ export default function Employ({ vacationRequests }) {
 
         //________________________________________________________________//
         
+      )}
+{data && (
+        <Table striped bordered hover size="sm" style={{ textAlign: "center" }}>
+          <thead>
+            <tr>
+              <th># id</th>
+              <th>Name</th>
+              <th>date</th>
+              <th>state</th>
+              
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>{data.id}</td>
+              <td>{data.Name}</td>
+              <td>{date}</td>
+              <td></td>
+              
+            </tr>
+          </tbody>
+        </Table>
       )}
 </Container>
   );

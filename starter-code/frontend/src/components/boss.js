@@ -53,15 +53,6 @@ export default function Employ() {
 
       <h4> Employees Data:</h4>
       
-      <InputGroup className="mb-3">
-        <InputGroup.Text id="basic-addon1">@</InputGroup.Text>
-        <FormControl
-          placeholder="Username"
-          aria-label="Username"
-          aria-describedby="basic-addon1"
-        />
-        
-      </InputGroup>
       {data && (
         <Table striped bordered hover size="sm">
           <thead>
@@ -94,7 +85,7 @@ export default function Employ() {
           </tbody>
         </Table>
       )}
-<h4>Vanction Data:</h4>
+<h4>vacation Data:</h4>
       {data && (
         <Table
           striped
